@@ -11,8 +11,6 @@ const App: React.FC = () => {
 
   const dataParamsContext = useContext(ParamsContext);
 
-  console.log(dataParamsContext?.paramsRequest)
-
   const {
     dataCalls,
     loading,

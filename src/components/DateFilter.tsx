@@ -1,10 +1,9 @@
-import { SetStateAction, useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ParamsContext } from "../context/ParamsContext";
 import rowLeft from '../assets/icons/rowLeft.svg';
 import rowRight from '../assets/icons/rowRigth.svg';
 import { DatePicker, Space } from "antd";
-import { Moment } from "moment";
-import { formatDate } from "../utils/utils";
+import { formatDate, getSelectedPeriodDates } from "../utils/utils";
 
 const options = [
     { value: '3day', label: '3 дня' },
@@ -16,15 +15,18 @@ const options = [
 const DateFilter: React.FC = () => {
 
     const dataParamsContext = useContext(ParamsContext);
-    const [selectedOption, setSelectedOption] = useState<string | number>('3day');
+    const [selectedOption, setSelectedOption] = useState<string>('3day');
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [dateRange, setDateRange] = useState<moment.Moment[]>([]);
 
     const { RangePicker } = DatePicker;
 
-    const handleOptionClick = (option: string | number) => {
+    const handleOptionClick = (option: string) => {
         setDateRange([]);
         setSelectedOption(option);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const findedStartEndDays: any = getSelectedPeriodDates(option);
+        dataParamsContext?.handleFilterDate(findedStartEndDays.start_date, findedStartEndDays.end_date);
         setIsOpen(false);
     };
 
@@ -32,8 +34,8 @@ const DateFilter: React.FC = () => {
     const onDateRangeChange = (dates: any) => {
         setSelectedOption('');
         setDateRange(dates);
-        const date_start = formatDate(dateRange[0]?.startOf('day').toISOString());
-        const date_end = formatDate(dateRange[0]?.startOf('day').toISOString());
+        const date_start = formatDate(dates[0].startOf('day').toISOString());
+        const date_end = formatDate(dates[1].endOf('day').toISOString());
         dataParamsContext?.handleFilterDate(date_start, date_end);
         setIsOpen(false);
     };
@@ -47,7 +49,7 @@ const DateFilter: React.FC = () => {
                         className="inline-flex justify-between w-full text-sm font-normal text-[#5e7793]"
                         onClick={() => setIsOpen(!isOpen)}>
                             {options.find((option) => option.value === selectedOption)?.label}
-                            {dateRange.length > 0 && formatDate(dateRange[0]?.startOf('day').toISOString()) + ' ' + ' ' + formatDate(dateRange[1]?.endOf('day').toISOString())}
+                            {dateRange.length > 0 && formatDate(dateRange[0].startOf('day').toISOString()) + ' ' + formatDate(dateRange[1].endOf('day').toISOString())}
                     </button>
                     <img className="w-2 h-2 cursor-pointer" src={rowRight} alt="стрелка"/>
                 </div>    
@@ -67,7 +69,7 @@ const DateFilter: React.FC = () => {
                 ))}
                 <p className="block px-4 py-2 text-sm w-full text-left">Указать даты</p>
                 <Space direction="vertical" className="mb-2">
-                    <RangePicker placeholder={['--.--', '--.--']} className='border-none' onChange={onDateRangeChange}/>
+                    <RangePicker format="YYYY-MM-DD" placeholder={['--.--', '--.--']} className='border-none' onChange={onDateRangeChange}/>
                 </Space>
                 </div>
             </div>

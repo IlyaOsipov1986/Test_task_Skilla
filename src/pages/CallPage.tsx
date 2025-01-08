@@ -7,7 +7,6 @@ import StatusCall from "../components/ui/StatusCall";
 import { ICallsData } from "../types/calls.interface";
 import { filteredDataCalls, formatTime, formatTimeToDuration } from "../utils/utils";
 import { ParamsContext } from "../context/ParamsContext";
-import Spinner from "../components/Spinner";
 
 interface ICallPageProps {
     dataCalls: ICallsData[] | undefined;
@@ -24,7 +23,7 @@ const CallPage: React.FC<ICallPageProps> = (props) => {
    
     useEffect(() => {
         let isMounted = true;
-        if (dataCalls && dataCalls.length > 0) {
+        if (dataCalls) {
             // eslint-disable-next-line @typescript-eslint/no-unused-expressions
             isMounted && setDataForRender(dataCalls);
         }
@@ -92,8 +91,8 @@ const CallPage: React.FC<ICallPageProps> = (props) => {
                     </>
                 ) : (
                     <tr>
-                        <td>
-                            <Spinner/>
+                        <td className="mt-2 fixed left-2/4">
+                            Данные не найдены!
                         </td>
                     </tr>
                 )}

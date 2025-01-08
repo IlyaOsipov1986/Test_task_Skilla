@@ -3,6 +3,7 @@ import { getСalls } from "../../api.js";
 import { ICallsResponse, ICallsParams } from "../../types/calls.interface.js";
 
 const useFetchCalls = (params: ICallsParams | undefined) => {
+
     const [dataCalls, setDataCalls] = useState<ICallsResponse>();
     const [loading, setLoading] = useState(true);
   
@@ -15,9 +16,11 @@ const useFetchCalls = (params: ICallsParams | undefined) => {
         }
         setLoading(false);
       };
-    
-      fetchData();
-     
+
+      if (params?.date_start && params?.date_end ) {
+        fetchData();
+      }
+      
     }, [params?.date_start, params?.date_end, params?.sort_by]);
   
     return {

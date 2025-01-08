@@ -1,5 +1,6 @@
-import React, { createContext, useState, ReactNode } from 'react';
+import React, { createContext, useState, ReactNode, useEffect } from 'react';
 import { ICallsParams } from '../types/calls.interface';
+import { getSelectedPeriodDates } from '../utils/utils';
 
 // Определяем типы для контекста
 interface ParamsContextType {
@@ -16,11 +17,17 @@ export const ParamsContext = createContext<ParamsContextType | undefined>(undefi
 
 // Провайдер контекста
 export const ParamsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [paramsRequest, setParamsRequest] = useState<ICallsParams>({
-    date_start: '2022-01-07',
-    date_end: '2024-01-28'
-  });
+  const [paramsRequest, setParamsRequest] = useState<ICallsParams>({});
   const [selectedOption, setSelectedOption] = useState<string | number>('all');
+
+  useEffect(() => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const findedStartEndDays: any = getSelectedPeriodDates('3day');
+      setParamsRequest({
+        date_start: findedStartEndDays.start_date,
+        date_end: findedStartEndDays.end_date
+      })
+  },[])
 
   const handleSort = (typeSort: string) => {
     switch(typeSort) {
@@ -33,8 +40,7 @@ export const ParamsProvider: React.FC<{ children: ReactNode }> = ({ children }) 
   };
 
   const handleFilterDate = (date_start: string, date_end: string) => {
-    setParamsRequest (
-      { 
+    setParamsRequest ({
         date_start: date_start,
         date_end: date_end
       });
