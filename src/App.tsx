@@ -25,8 +25,8 @@ const App: React.FC = () => {
       ) : (
         <div className="call-page-container">
           <Filters>
-            <DateFilter/>
             <TypeCallFilter/>
+            <DateFilter/>
           </Filters>
           <CallPage
             dataCalls={dataCalls?.results}

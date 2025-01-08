@@ -6,6 +6,7 @@ interface ParamsContextType {
   paramsRequest: ICallsParams;
   handleSort: (typeSort: string) => void;
   handleFilterChange: (value: string | number) => void;
+  handleFilterDate: (date_start: string, date_end: string) => void;
   selectedOption: string | number;
 }
 
@@ -31,12 +32,20 @@ export const ParamsProvider: React.FC<{ children: ReactNode }> = ({ children }) 
     }
   };
 
+  const handleFilterDate = (date_start: string, date_end: string) => {
+    setParamsRequest (
+      { 
+        date_start: date_start,
+        date_end: date_end
+      });
+  };
+
   const handleFilterChange = (value: string | number) => {
     setSelectedOption(value);
   };
 
   return (
-    <ParamsContext.Provider value={{ paramsRequest, handleSort, handleFilterChange, selectedOption }}>
+    <ParamsContext.Provider value={{ paramsRequest, handleSort, handleFilterChange, selectedOption, handleFilterDate }}>
       {children}
     </ParamsContext.Provider>
   );

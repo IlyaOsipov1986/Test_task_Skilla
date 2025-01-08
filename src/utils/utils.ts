@@ -23,9 +23,13 @@ export const formatTimeToDuration = (seconds: number) => {
 };
 
 export const filteredDataCalls = (dataForRender: ICallsData[], params: string | number | undefined) => {
-        if (params === 'all') {
-            return dataForRender;
-        } else {
-            return dataForRender.filter((el => el.in_out === params))
-            }
-        }
+    if (params === 'all') {
+        return dataForRender;
+    } else {
+        return dataForRender.filter((el => el.in_out === params))
+    }
+}
+
+export const formatDate = (value: string) => {
+    return moment(value).format("YYYY-MM-DD");
+};

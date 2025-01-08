@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import GradeStatus from "../components/ui/GradeStatus";
 import NumberCall from "../components/ui/NumberCall";
 import PersonAvatar from "../components/ui/PersonAvatar";
@@ -7,6 +7,7 @@ import StatusCall from "../components/ui/StatusCall";
 import { ICallsData } from "../types/calls.interface";
 import { filteredDataCalls, formatTime, formatTimeToDuration } from "../utils/utils";
 import { ParamsContext } from "../context/ParamsContext";
+import Spinner from "../components/Spinner";
 
 interface ICallPageProps {
     dataCalls: ICallsData[] | undefined;
@@ -15,7 +16,7 @@ interface ICallPageProps {
 const CallPage: React.FC<ICallPageProps> = (props) => {
 
     const {
-        dataCalls,
+        dataCalls
     } = props;
 
     const [dataForRender, setDataForRender] = useState<ICallsData[]>();
@@ -90,7 +91,11 @@ const CallPage: React.FC<ICallPageProps> = (props) => {
                     ))}
                     </>
                 ) : (
-                    <p>Данные не найдены!</p>
+                    <tr>
+                        <td>
+                            <Spinner/>
+                        </td>
+                    </tr>
                 )}
                 </tbody>
             </table>
