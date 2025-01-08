@@ -13,6 +13,10 @@ const App: React.FC = () => {
   
   console.log(loading)
 
+  if (loading) {
+    return <div>Загрузка</div>
+  }
+
   return (
     <div className="app bg-primary-ligthGray">
       <CallPage

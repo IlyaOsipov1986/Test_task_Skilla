@@ -12,5 +12,14 @@ export interface ICallsResponse {
 }
 
 export interface ICallsData {
-  id: number
+  id: number;
+  date: string;
+  date_notime: string;
+  in_out: number;
+  person_avatar: string;
+  record: string;
+  source: string;
+  time: number;
+  from_number: string;
+  to_number: string;
 }
