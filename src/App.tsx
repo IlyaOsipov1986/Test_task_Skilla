@@ -1,3 +1,4 @@
+import CallPage from "./pages/CallPage";
 import useFetchCalls from "./utils/fetchers/useFetchCalls";
 
 const App: React.FC = () => {
@@ -10,13 +11,15 @@ const App: React.FC = () => {
     date_end: '2024-01-28'
   });
   
-  console.log(dataCalls?.results)
   console.log(loading)
 
   return (
-    <div className="app">
+    <div className="app bg-primary-ligthGray">
+      <CallPage
+        dataCalls={dataCalls?.results}
+      />
     </div>
   )
 }
 
-export default App
+export default App;
