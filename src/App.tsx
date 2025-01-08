@@ -17,8 +17,6 @@ const App: React.FC = () => {
     dataCalls,
     loading,
   } = useFetchCalls(dataParamsContext?.paramsRequest);
-  
-  console.log(loading)
 
   return (
     <div className="app bg-primary-ligthGray">

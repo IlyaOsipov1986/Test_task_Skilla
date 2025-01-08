@@ -1,4 +1,5 @@
 import moment from "moment";
+import { ICallsData } from "../types/calls.interface";
 
 export const formatTime = (value: string) => {
     if (!value) return "";
@@ -20,3 +21,11 @@ export const formatTimeToDuration = (seconds: number) => {
   
     return formattedTime;
 };
+
+export const filteredDataCalls = (dataForRender: ICallsData[], params: string | number | undefined) => {
+        if (params === 'all') {
+            return dataForRender;
+        } else {
+            return dataForRender.filter((el => el.in_out === params))
+            }
+        }

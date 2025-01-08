@@ -1,28 +1,27 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import rowDown from "../assets/icons/rowDown.svg";
 import rowUp from "../assets/icons/rowUp.svg";
 import clearFilter from '../assets/icons/deleteIcon.svg';
+import { ParamsContext } from "../context/ParamsContext";
 
 const options = [
     { value: 'all', label: 'Все типы' },
-    { value: 'incoming', label: 'Входящие' },
-    { value: 'outgoing', label: 'Исходящие' },
+    { value: 1, label: 'Входящие' },
+    { value: 0, label: 'Исходящие' },
 ];
 
-const TypeCallFilter: React.FC<{ onFilterChange: (value: string) => void }> = ({ onFilterChange }) => {
+const TypeCallFilter: React.FC = () => {
 
-    const [selectedOption, setSelectedOption] = useState<string>('all');
+    const dataParamsContext = useContext(ParamsContext);
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
-    const handleOptionClick = (option: string) => {
-        setSelectedOption(option);
-        onFilterChange(option);
+    const handleOptionClick = (option: string | number) => {
+        dataParamsContext?.handleFilterChange(option);
         setIsOpen(false);
     };
 
     const handleClearOptionClick = () => {
-        setSelectedOption('all');
-        onFilterChange('all');
+        dataParamsContext?.handleFilterChange('all');
         setIsOpen(false);
     }
 
@@ -34,11 +33,11 @@ const TypeCallFilter: React.FC<{ onFilterChange: (value: string) => void }> = ({
                         type="button"
                         className="inline-flex justify-between w-full text-sm font-normal text-[#5e7793]"
                         onClick={() => setIsOpen(!isOpen)}>
-                        {options.find((option) => option.value === selectedOption)?.label}
+                        {options.find((option) => option.value === dataParamsContext?.selectedOption)?.label}
                     </button>
                     <img className="w-2 h-2" src={isOpen ? rowUp : rowDown} alt="стрелка"/>
                 </div>
-                {selectedOption !=='all' && <div className="inline-flex gap-1 items-center">
+                {dataParamsContext?.selectedOption !=='all' && <div className="inline-flex gap-1 items-center">
                     <p className="inline-flex justify-between w-full text-sm font-normal text-[#5e7793]">
                         Сбросить фильтры
                     </p>
@@ -52,7 +51,7 @@ const TypeCallFilter: React.FC<{ onFilterChange: (value: string) => void }> = ({
                 {options.map((option) => (
                     <button
                         key={option.value}
-                        className={`block px-4 py-2 text-sm w-full text-left text-gray-700 hover:bg-[#dee4ff] focus:outline-none ${selectedOption === option.value ? 'text-[#002cfb]' : ''}`}
+                        className={`block px-4 py-2 text-sm w-full text-left hover:bg-[#dee4ff] focus:outline-none ${dataParamsContext?.selectedOption === option.value ? 'text-[#002cfb]' : ''}`}
                         role="menuitem"
                         onClick={() => handleOptionClick(option.value)}
                     >

@@ -5,6 +5,8 @@ import { ICallsParams } from '../types/calls.interface';
 interface ParamsContextType {
   paramsRequest: ICallsParams;
   handleSort: (typeSort: string) => void;
+  handleFilterChange: (value: string | number) => void;
+  selectedOption: string | number;
 }
 
 // Создаем контекст с начальным значением
@@ -17,6 +19,7 @@ export const ParamsProvider: React.FC<{ children: ReactNode }> = ({ children }) 
     date_start: '2022-01-07',
     date_end: '2024-01-28'
   });
+  const [selectedOption, setSelectedOption] = useState<string | number>('all');
 
   const handleSort = (typeSort: string) => {
     switch(typeSort) {
@@ -28,8 +31,12 @@ export const ParamsProvider: React.FC<{ children: ReactNode }> = ({ children }) 
     }
   };
 
+  const handleFilterChange = (value: string | number) => {
+    setSelectedOption(value);
+  };
+
   return (
-    <ParamsContext.Provider value={{ paramsRequest, handleSort }}>
+    <ParamsContext.Provider value={{ paramsRequest, handleSort, handleFilterChange, selectedOption }}>
       {children}
     </ParamsContext.Provider>
   );

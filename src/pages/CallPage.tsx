@@ -1,10 +1,12 @@
+import { useContext, useEffect, useRef, useState } from "react";
 import GradeStatus from "../components/ui/GradeStatus";
 import NumberCall from "../components/ui/NumberCall";
 import PersonAvatar from "../components/ui/PersonAvatar";
 import Sorting from "../components/ui/Sorting";
 import StatusCall from "../components/ui/StatusCall";
 import { ICallsData } from "../types/calls.interface";
-import { formatTime, formatTimeToDuration } from "../utils/utils";
+import { filteredDataCalls, formatTime, formatTimeToDuration } from "../utils/utils";
+import { ParamsContext } from "../context/ParamsContext";
 
 interface ICallPageProps {
     dataCalls: ICallsData[] | undefined;
@@ -15,6 +17,20 @@ const CallPage: React.FC<ICallPageProps> = (props) => {
     const {
         dataCalls,
     } = props;
+
+    const [dataForRender, setDataForRender] = useState<ICallsData[]>();
+    const dataParamsContext = useContext(ParamsContext);
+   
+    useEffect(() => {
+        let isMounted = true;
+        if (dataCalls && dataCalls.length > 0) {
+            // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+            isMounted && setDataForRender(dataCalls);
+        }
+        return () => {
+            isMounted = false;
+        }
+    }, [dataCalls])
 
     return (
         <div className="overflow-x-auto">
@@ -39,9 +55,9 @@ const CallPage: React.FC<ICallPageProps> = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                {dataCalls && dataCalls.length > 0 ? (
+                {dataForRender && dataForRender.length > 0 ? (
                     <>
-                    {dataCalls?.map(item => (
+                    {filteredDataCalls(dataForRender, dataParamsContext?.selectedOption).map(item => (
                         <tr key={item.id} className="hover:bg-[#d4dff3]/50 hover:cursor-pointer h-16">
                             <td className="w-14 py-2 px-4 border-b border-gray-200">
                                 <StatusCall
