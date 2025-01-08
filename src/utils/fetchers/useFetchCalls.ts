@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getСalls } from "../../api.js";
 import { ICallsResponse, ICallsParams } from "../../types/calls.interface.js";
 
-const useFetchCalls = (params: ICallsParams) => {
+const useFetchCalls = (params: ICallsParams | undefined) => {
     const [dataCalls, setDataCalls] = useState<ICallsResponse>();
     const [loading, setLoading] = useState(true);
   
@@ -16,10 +16,10 @@ const useFetchCalls = (params: ICallsParams) => {
         setLoading(false);
       };
       
-      if (params.date_start && params.date_end) {
+      if (params?.date_start && params?.date_end) {
         fetchData();
       }
-    }, [params.date_start, params.date_end]);
+    }, [params?.date_start, params?.date_end, params?.sort_by]);
   
     return {
       dataCalls,

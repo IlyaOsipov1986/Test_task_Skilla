@@ -11,7 +11,7 @@ const GradeStatus: React.FC = () => {
 
     const gradeArr = [statusGradeWell, statusGradeGood, statusGradeBad];
 
-    return(
+    return (
         <img className='object-cover' src={getRandomValueGrage(gradeArr)} alt="оценка"/>
     )
 }

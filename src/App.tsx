@@ -1,15 +1,18 @@
+import { useContext } from "react";
 import CallPage from "./pages/CallPage";
 import useFetchCalls from "./utils/fetchers/useFetchCalls";
+import { ParamsContext }  from "./context/ParamsContext.tsx";
 
 const App: React.FC = () => {
+
+  const dataParamsContext = useContext(ParamsContext);
+
+  console.log(dataParamsContext?.paramsRequest)
 
   const {
     dataCalls,
     loading,
-  } = useFetchCalls({
-    date_start: '2024-01-07',
-    date_end: '2024-01-28'
-  });
+  } = useFetchCalls(dataParamsContext?.paramsRequest);
   
   console.log(loading)
 

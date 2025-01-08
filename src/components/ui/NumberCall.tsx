@@ -16,7 +16,7 @@ const NumberCall: React.FC<INumberCallProps> = (props) => {
 
     const { number } = useSelectNumberCall(dataForNumber.in_out, dataForNumber.from_number, dataForNumber.to_number);
 
-    return(
+    return (
         <p>{number}</p>
     )
 }

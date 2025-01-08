@@ -12,14 +12,14 @@ export const apiService = axios.create({
 });
 
 //Запрос для получения списка звонков  
-export const getСalls = async (params: ICallsParams) => {
+export const getСalls = async (params: ICallsParams | undefined) => {
   const queryString = qs.stringify(
     {
-      date_start: params.date_start,
-      date_end: params.date_end,
-      in_out: params.in_out,
-      sort_by: params.sort_by,
-      limit: params.limit
+      date_start: params?.date_start,
+      date_end: params?.date_end,
+      in_out: params?.in_out,
+      sort_by: params?.sort_by,
+      limit: params?.limit
     },
     {
       arrayFormat: "repeat",

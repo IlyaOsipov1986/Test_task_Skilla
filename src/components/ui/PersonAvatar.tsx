@@ -8,7 +8,7 @@ const PersonAvatar: React.FC<IPersonAvatarProps> = (props) => {
         person_avatar
     } = props;
 
-    return(
+    return (
         <img className='w-8 h-8 rounded-full object-cover' src={person_avatar} alt="аватар"/>
     )
 }

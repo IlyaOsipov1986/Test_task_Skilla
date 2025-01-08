@@ -6,9 +6,9 @@ const getTypeIconForStatus = (status: unknown) => {
     if (status === 1) {
       return callIncoming;
     } else if(status === 0) {
-        return callOutgoing;
+      return callOutgoing;
     } else {
-        return callMissed;
+      return callMissed;
     }
 };
 
