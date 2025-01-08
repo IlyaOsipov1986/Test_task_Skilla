@@ -15,10 +15,9 @@ const useFetchCalls = (params: ICallsParams | undefined) => {
         }
         setLoading(false);
       };
-      
-      if (params?.date_start && params?.date_end) {
-        fetchData();
-      }
+    
+      fetchData();
+     
     }, [params?.date_start, params?.date_end, params?.sort_by]);
   
     return {

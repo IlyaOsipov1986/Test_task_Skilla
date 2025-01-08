@@ -51,10 +51,24 @@ button {
     background-color: #FFFFFF;
 }
 @layer components {
-    .call-page-conteiner {
+    .call-page-container {
         max-width: 1440px;
-        margin: 80px auto 120px;
+        margin: 80px auto 0 auto;
         padding: 0 20px;
         width: 100%;
+    }
+    .filters {
+        display: flex;
+        justify-content: space-between;
+        height: 40px;
+    }
+    .spinner {
+        position: fixed;
+        width: 100%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        justify-content: center;
     }
 }
