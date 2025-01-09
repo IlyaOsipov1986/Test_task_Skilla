@@ -1,6 +1,18 @@
 import moment from "moment";
 import { ICallsData } from "../types/calls.interface";
 
+export const addGradeStatusProp = (dataCalls: ICallsData[]) => {
+    if(!dataCalls) {
+        return [];
+    }
+    const values = [0, 1, 2];
+    const resultsGradeStatusProp = dataCalls?.map((el) => {
+        const randomIndex = Math.floor(Math.random() * values.length);
+    return {...el, gradeIndex: values[randomIndex]}
+    })
+    return resultsGradeStatusProp;
+}
+
 export const formatTime = (value: string) => {
     if (!value) return "";
     return moment

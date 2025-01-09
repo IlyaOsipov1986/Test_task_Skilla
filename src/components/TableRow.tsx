@@ -39,7 +39,9 @@ const TableRow: React.FC<ICallsData> = ({...item}) => {
                     {item.source}
                 </td>
                 <td className="w-96 py-2 px-4 border-b border-gray-200">
-                    <GradeStatus/> 
+                    <GradeStatus
+                        gradeIndex={item.gradeIndex}
+                    /> 
                 </td>
                 <td className="w-24 py-2 px-4 border-b border-gray-200 text-[#122945] font-light text-base text-right">
                     <div className="inline-flex gap-2.5 items-center relative">

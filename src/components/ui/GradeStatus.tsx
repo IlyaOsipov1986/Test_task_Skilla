@@ -7,12 +7,20 @@ const getRandomValueGrage = (gradeArr: string[]) => {
     return gradeArr[randomIndex];
 };
 
-const GradeStatus: React.FC = () => {
+interface IGradeStatusProps {
+    gradeIndex: number | undefined;
+}
+  
+const GradeStatus: React.FC<IGradeStatusProps> = (props) => {
+
+    const {
+        gradeIndex
+    } = props;
 
     const gradeArr = [statusGradeWell, statusGradeGood, statusGradeBad];
 
     return (
-        <img className='object-cover' src={getRandomValueGrage(gradeArr)} alt="оценка"/>
+        <img className='object-cover' src={gradeArr[gradeIndex ?? 1]} alt="оценка"/>
     )
 }
 export default GradeStatus;

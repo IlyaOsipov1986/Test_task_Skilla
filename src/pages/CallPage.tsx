@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import Sorting from "../components/ui/Sorting";
 import { ICallsData } from "../types/calls.interface";
-import { filteredDataCalls } from "../utils/utils";
+import { addGradeStatusProp, filteredDataCalls } from "../utils/utils";
 import { ParamsContext } from "../context/ParamsContext";
 import TableRow from "../components/TableRow";
 import React from "react";
@@ -22,8 +22,9 @@ const CallPage: React.FC<ICallPageProps> = (props) => {
     useEffect(() => {
         let isMounted = true;
         if (dataCalls) {
+            const results = addGradeStatusProp(dataCalls);
             // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-            isMounted && setDataForRender(dataCalls);
+            isMounted && setDataForRender(results);
         }
         return () => {
             isMounted = false;

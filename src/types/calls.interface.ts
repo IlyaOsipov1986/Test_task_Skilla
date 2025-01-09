@@ -22,4 +22,5 @@ export interface ICallsData {
   time: number;
   from_number: string;
   to_number: string;
+  gradeIndex?: number;
 }
