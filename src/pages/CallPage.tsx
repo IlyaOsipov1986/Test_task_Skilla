@@ -36,7 +36,7 @@ const CallPage: React.FC<ICallPageProps> = (props) => {
         <div className="overflow-x-auto">
             <Table>
                 <TableHeader/>
-                <tbody>
+                <tbody className="table-rows">
                 {dataForRender && filteredDataCalls(dataForRender, dataParamsContext?.selectedOption).length > 0 ? (
                     <>
                         {filteredDataCalls(dataForRender, dataParamsContext?.selectedOption).map(item => (
