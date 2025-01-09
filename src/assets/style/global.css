@@ -28,7 +28,7 @@ body {
     height: 100%;
     line-height: 1;
     font-size: 18px;
-    background-color: #FFFFFF;
+    background-color:#F1F4F9;
     font-family: Roboto, 'Arial';
     /*overflow-y: scroll;*/
 }
@@ -36,6 +36,10 @@ button {
     font-family: Roboto, 'Arial';
 }
 .app {
+    display: flex;
+    min-height: 100%;
+    max-width: 1920px;
+    width: 100%;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     -webkit-text-size-adjust: 100%;
@@ -45,6 +49,26 @@ button {
     color: #000000;
     min-width: 300px;
     background-color: #FFFFFF;
-    min-height: 100%;
 }
-@layer components {}
+@layer components {
+    .call-page-container {
+        max-width: 1440px;
+        margin: 80px auto 0 auto;
+        padding: 0 20px;
+        width: 100%;
+    }
+    .filters {
+        display: flex;
+        justify-content: space-between;
+        height: 40px;
+    }
+    .spinner {
+        position: fixed;
+        width: 100%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        justify-content: center;
+    }
+}

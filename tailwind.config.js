@@ -8,9 +8,13 @@ export default {
       extend: {
         colors: {
             primary: {
-              ligthBlue: '#ebf4ff'
+              ligthGray: '#F1F4F9'
             }
           }
+        },
+        fontSize: {
+          sm: ['14px', '20px'],
+          base: ['15px', '24px'],
         }
       },
     plugins: [],
