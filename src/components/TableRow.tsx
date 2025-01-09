@@ -11,10 +11,17 @@ const TableRow: React.FC<ICallsData> = ({...item}) => {
 
     const [isHovered, setIsHovered] = useState(false);
 
+    const nn = () => {
+        if(isHovered) {
+            return
+        } else {
+            setIsHovered(true);
+        }
+    }
+
     return (
         <>
-            <tr onMouseEnter={() => setIsHovered(true)} 
-                onMouseLeave={() => setIsHovered(false)} 
+            <tr onMouseEnter={() => nn()} 
                 className="hover:bg-[#d4dff3]/20 hover:cursor-pointer h-16"
             >
                 <td className="w-14 py-2 px-4 border-b border-gray-200">
@@ -47,10 +54,11 @@ const TableRow: React.FC<ICallsData> = ({...item}) => {
                     <div className="inline-flex gap-2.5 items-center relative">
                         {formatTimeToDuration(item.time)}
                         {isHovered && item.record && 
-                        <AudioPlayer
-                            id={item.record}
-                        />
-                    }
+                            <AudioPlayer
+                                id={item.record}
+                                setIsHovered={setIsHovered}
+                            />
+                        }   
                     </div>                  
                 </td>
             </tr>
