@@ -29,3 +29,17 @@ export const getСalls = async (params: ICallsParams | undefined) => {
     .post(`mango/getList?${queryString}`)
     .then((resp) => resp.data);
 };
+
+//Запрос для получения записи 
+export const getRecord = async (id: string) => {
+  return await apiService
+    .post(`mango/getRecord?record=${id}`, {
+      headers: {
+        "Content-type": 'audio/mpeg, audio/x-mpeg, audio/x-mpeg-3, audio/mpeg3',
+        "Content-Transfer-Encoding": "binary",  
+      },
+    },
+      {responseType: 'blob'}
+    )
+    .then((resp) => resp.data);
+};
