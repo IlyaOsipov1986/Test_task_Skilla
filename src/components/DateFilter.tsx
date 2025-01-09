@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { ParamsContext } from "../context/ParamsContext";
 import rowLeft from '../assets/icons/rowLeft.svg';
 import rowRight from '../assets/icons/rowRigth.svg';

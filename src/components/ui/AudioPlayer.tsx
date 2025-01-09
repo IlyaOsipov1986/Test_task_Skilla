@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import useFetchRecord from "../../utils/fetchers/useFetchRecord";
 import { Spin } from 'antd';
-import { formatTimeToDuration } from "../../utils/utils";
 
 interface IAudioPlayerProps {
     id: string;
