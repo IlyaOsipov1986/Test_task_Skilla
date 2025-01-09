@@ -8,14 +8,12 @@ import downLoadIcon from '../../assets/icons/downLoadIcon.svg';
 
 interface IAudioPlayerProps {
     id: string;
-    setIsHovered: (value: boolean) => void;
 }
 
 const AudioPlayer: React.FC<IAudioPlayerProps> = (props) => {
     
     const {
         id,
-        setIsHovered
     } = props;
 
     const {
@@ -27,6 +25,7 @@ const AudioPlayer: React.FC<IAudioPlayerProps> = (props) => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentTime, setCurrentTime] = useState(0); 
     const [duration, setDuration] = useState(0);
+    const [isVisible, setIsVisible] = useState(true);
     const audioRef = useRef<HTMLAudioElement>(null);
 
     useEffect(() => {
@@ -41,7 +40,7 @@ const AudioPlayer: React.FC<IAudioPlayerProps> = (props) => {
             audio.removeEventListener("timeupdate", updateProgress);
           };
         }
-      }, []);
+      }, [audioRef.current]);
     
       const togglePlay = (): void => {
         if (audioRef.current) {
@@ -71,7 +70,7 @@ const AudioPlayer: React.FC<IAudioPlayerProps> = (props) => {
       };
     
     const handleHidePlayer = (): void => {
-        setIsHovered(false);
+      setIsVisible(false);
     };
 
     const progressBar = (currentTime / duration) * 100 || 0;
@@ -93,7 +92,7 @@ const AudioPlayer: React.FC<IAudioPlayerProps> = (props) => {
             <Spin size="small"/>
         ) : (
            <>
-        {audioUrl && (
+        {audioUrl && isVisible && (
             <div className="audio__player">
                 <audio ref={audioRef} src={audioUrl} preload="auto">
                     <track kind="metadata" />
@@ -137,7 +136,7 @@ const AudioPlayer: React.FC<IAudioPlayerProps> = (props) => {
                 <button
                     className="audio__player__controls__hide"
                     type="button"
-                    onClick={handleHidePlayer}
+                    onClick={() => handleHidePlayer()}
                     aria-label="Hide Player"
                 >
                     <img className="w-4 h-4" src={hidePlayerIcon} alt="крестик"/>
